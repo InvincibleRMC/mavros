@@ -451,7 +451,7 @@ TEST_F(TestRouter, uas_recv_message)
 
   EXPECT_CALL(*uas1, recv_message(_, fr));
 
-  rclcpp::executors::MultiThreadedExecutor exec;
+  rclcpp::executors::SingleThreadedExecutor exec;
   exec.add_node(router);
 
   auto pub = router->create_publisher<mavros_msgs::msg::Mavlink>("/uas2/mavlink_sink", 1);

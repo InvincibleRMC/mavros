@@ -35,13 +35,17 @@ namespace uas
 /**
  * Executor for UAS Plugin nodes
  */
-class UASExecutor : public rclcpp::executors::MultiThreadedExecutor
+class UASExecutor : public rclcpp::executors::SingleThreadedExecutor
 {
 public:
   explicit UASExecutor(const rclcpp::ExecutorOptions & options = rclcpp::ExecutorOptions());
   ~UASExecutor() = default;
 
   void set_ids(uint8_t sysid, uint8_t compid);
+  constexpr size_t get_number_of_threads()
+  {
+    return 1;
+  }
 
 protected:
   void run(size_t thread_id);
